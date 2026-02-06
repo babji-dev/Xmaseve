@@ -117,6 +117,16 @@
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const result = document.getElementById("result");
+  const title = document.getElementById("title");
+
+  // --- Read name from URL ---
+  const params = new URLSearchParams(window.location.search);
+  const toName = params.get("to");
+
+  if (toName) {
+    const safeName = decodeURIComponent(toName);
+    title.innerHTML = `${safeName}, will you be my Valentine? 💖`;
+  }
 
   function moveNoButton() {
     const btnRect = noBtn.getBoundingClientRect();
@@ -131,16 +141,16 @@
     noBtn.style.top = y + "px";
   }
 
-  // Desktop hover
+  // Desktop
   noBtn.addEventListener("mouseenter", moveNoButton);
 
-  // Mobile touch
+  // Mobile
   noBtn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     moveNoButton();
   });
 
-  // Fallback click
+  // Fallback
   noBtn.addEventListener("click", moveNoButton);
 
   yesBtn.addEventListener("click", () => {
@@ -159,10 +169,11 @@
       document.body.appendChild(heart);
 
       setTimeout(() => heart.remove(), 5000);
-    }, 300);
+    }, 500);
   }
 </script>
 
 </body>
 </html>
+
 
