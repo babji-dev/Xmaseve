@@ -1,179 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Will You Be My Valentine? ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Babji & Sravanthi – Save the Date</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+  :root {
+    --cream: #fdf8f4;
+    --blush: #f2d4d7;
+    --mauve: #c9a0a8;
+    --lavender: #d4c5e2;
+    --sage: #b5c9b0;
+    --gold: #c9a84c;
+    --deep: #5a3e4b;
+    --font-script: 'Cormorant Garamond', serif;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+  }
 
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+  html { scroll-behavior: smooth; }
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 90%;
-    }
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 30px;
-    }
+  /* ── Floral SVG BG repeating ── */
+  .floral-bg {
+    background-image:
+      radial-gradient(ellipse 60% 40% at 5% 5%, rgba(212,197,226,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 95% 10%, rgba(242,212,215,0.40) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 90%, rgba(181,201,176,0.30) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(201,160,168,0.25) 0%, transparent 60%);
+    background-color: var(--cream);
+  }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      position: relative;
-    }
+  /* Decorative corner flowers via SVG data URIs */
+  .corner-flowers {
+    position: absolute;
+    width: 200px;
+    pointer-events: none;
+    opacity: 0.65;
+    z-index: 0;
+  }
+  .corner-tl { top: 0; left: 0; transform-origin: top left; }
+  .corner-tr { top: 0; right: 0; transform: scaleX(-1); transform-origin: top right; }
+  .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); transform-origin: bottom left; }
+  .corner-br { bottom: 0; right: 0; transform: scale(-1,-1); transform-origin: bottom right; }
 
-    button {
-      padding: 12px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  /* ── Section Wrapper ── */
+  section {
+    position: relative;
+    padding: 70px 24px;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  section + section { border-top: 1px dashed rgba(201,160,168,0.4); }
 
-    #yesBtn {
-      background: #ff4d6d;
-      color: white;
-    }
+  /* ── Typography ── */
+  .tag {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: var(--font-script);
+    font-size: clamp(3rem, 10vw, 4.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--deep);
+  }
+  h2 {
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--deep);
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  p { font-size: 0.95rem; line-height: 1.8; color: #7a5a64; }
 
-    #yesBtn:hover {
-      transform: scale(1.1);
-    }
+  .divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--mauve), transparent);
+    margin: 18px auto;
+  }
 
-    #noBtn {
-      background: #e0e0e0;
-      color: #333;
-      position: relative;
-    }
+  /* ── Hero / Cover ── */
+  #cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    position: relative;
+  }
+  #cover .wax-seal {
+    width: 72px; height: 72px;
+    background: radial-gradient(circle at 40% 35%, #e8c97a, #b8852a);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(184,133,42,0.35), inset 0 2px 6px rgba(255,255,255,0.3);
+    margin-bottom: 28px;
+    font-size: 2rem;
+    animation: sealBounce 3s ease-in-out infinite;
+  }
+  @keyframes sealBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  #cover .save-date {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-bottom: 6px;
+  }
+  #cover .date-line {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  #cover .kab-ab {
+    font-size: 0.85rem;
+    color: #9a7080;
+    font-style: italic;
+    margin-top: 18px;
+  }
 
-    .hidden {
-      display: none;
-    }
+  /* ── Countdown ── */
+  #countdown { background: linear-gradient(135deg, #fdf0f3 0%, #f5eef8 100%); }
+  .couple-photo-hero {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 30px rgba(201,160,168,0.4);
+    margin: 0 auto 28px;
+    display: block;
+    background: linear-gradient(135deg, var(--blush), var(--lavender));
+    position: relative;
+    overflow: hidden;
+  }
+  .couple-photo-hero-placeholder {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 8px 30px rgba(201,160,168,0.4);
+    margin: 0 auto 28px;
+    background: linear-gradient(135deg, var(--blush), var(--lavender));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0 18px;
+    flex-wrap: wrap;
+  }
+  .countdown-box {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    min-width: 70px;
+    box-shadow: 0 4px 20px rgba(201,160,168,0.2);
+    border: 1px solid rgba(212,197,226,0.4);
+  }
+  .countdown-box .num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1;
+  }
+  .countdown-box .lbl {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-top: 4px;
+  }
+  .team-buttons {
+    display: flex; gap: 14px; justify-content: center; margin-top: 24px; flex-wrap: wrap;
+  }
+  .team-btn {
+    padding: 10px 28px;
+    border-radius: 50px;
+    border: 1.5px solid var(--mauve);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--deep);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  .team-btn:hover, .team-btn.active {
+    background: var(--deep);
+    color: white;
+    border-color: var(--deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90,62,75,0.25);
+  }
+  .vote-result {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--mauve);
+    font-style: italic;
+    min-height: 24px;
+  }
 
-    .result {
-      font-size: 22px;
-      color: #ff4d6d;
-      margin-top: 20px;
-    }
+  /* ── Welcome ── */
+  #welcome .welcome-h { font-family: var(--font-script); font-size: clamp(3rem,10vw,4rem); font-style: italic; color: var(--deep); }
+  .intro-text { font-size: 0.95rem; color: #7a5a64; line-height: 1.9; }
 
-    /* Floating hearts */
-    .heart {
-      position: fixed;
-      bottom: -10px;
-      font-size: 24px;
-      animation: floatUp 4s linear forwards;
-    }
+  /* ── Meet the Couple ── */
+  .person-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 24px;
+    margin: 18px 0;
+    box-shadow: 0 4px 24px rgba(201,160,168,0.18);
+    border: 1px solid rgba(242,212,215,0.6);
+  }
+  .person-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 16px rgba(201,160,168,0.35);
+    margin: 0 auto 14px;
+    display: block;
+    background: linear-gradient(135deg, var(--blush), var(--lavender));
+    font-size: 2.5rem;
+    line-height: 90px;
+    text-align: center;
+  }
+  .person-card h3 { font-family: var(--font-script); font-size: 2rem; font-style: italic; font-weight: 400; }
+  .person-card p { font-size: 0.85rem; margin-top: 8px; color: #9a7080; font-style: italic; }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh);
-        opacity: 0;
-      }
-    }
-  </style>
+  /* ── Events ── */
+  #events { background: linear-gradient(160deg, #fdf0f3 0%, #f5eef8 100%); }
+  .events-subtitle { font-size: 0.8rem; color: var(--mauve); letter-spacing: 0.1em; margin-bottom: 30px; }
+  .event-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin: 14px 0;
+    text-align: left;
+    box-shadow: 0 4px 24px rgba(201,160,168,0.15);
+    border: 1px solid rgba(242,212,215,0.5);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+  .event-mehendi::before { background: linear-gradient(180deg, #a8d5a2, #6abe6a); }
+  .event-haldi::before { background: linear-gradient(180deg, #f7d574, #e8b83a); }
+  .event-wedding::before { background: linear-gradient(180deg, var(--mauve), var(--lavender)); }
+  .event-reception::before { background: linear-gradient(180deg, #c9a84c, #a0782a); }
+
+  .event-icon {
+    font-size: 2.2rem;
+    min-width: 48px;
+    text-align: center;
+  }
+  .event-info h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 6px; }
+  .event-info .event-date { font-size: 0.78rem; letter-spacing: 0.1em; color: var(--mauve); text-transform: uppercase; margin-bottom: 6px; }
+  .event-info .event-venue { font-size: 0.85rem; color: var(--deep); margin-bottom: 4px; }
+  .event-info .event-dress { font-size: 0.78rem; color: var(--gold); font-weight: 400; }
+  .event-info .event-desc { font-size: 0.82rem; color: #9a7080; font-style: italic; margin-top: 6px; line-height: 1.6; }
+
+  /* ── RSVP / Footer ── */
+  #footer {
+    background: var(--deep);
+    color: var(--cream);
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  #footer h2 { color: var(--blush); font-family: var(--font-script); font-style: italic; }
+  #footer p { color: rgba(253,248,244,0.7); font-size: 0.88rem; margin-top: 10px; }
+  #footer .footer-names {
+    font-family: var(--font-script);
+    font-size: 2.2rem;
+    font-style: italic;
+    color: var(--gold);
+    margin: 20px 0 8px;
+  }
+  #footer .hashtag {
+    font-size: 0.8rem; letter-spacing: 0.15em; color: rgba(253,248,244,0.5);
+  }
+
+  /* ── Animations ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Decorative flowers (CSS only) ── */
+  .petal-top-left, .petal-top-right, .petal-bot-left, .petal-bot-right {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .rel { position: relative; z-index: 1; }
+</style>
 </head>
+<body class="floral-bg">
 
-<body>
-  <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
+<!-- ══════════ COVER ══════════ -->
+<section id="cover">
+  <!-- SVG Floral Corner Decorations -->
+  <svg class="corner-flowers corner-tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="18" fill="#f2d4d7" opacity="0.7"/>
+    <circle cx="65" cy="20" r="12" fill="#d4c5e2" opacity="0.6"/>
+    <circle cx="20" cy="65" r="12" fill="#b5c9b0" opacity="0.5"/>
+    <circle cx="90" cy="40" r="8" fill="#f2d4d7" opacity="0.5"/>
+    <circle cx="40" cy="90" r="8" fill="#d4c5e2" opacity="0.5"/>
+    <ellipse cx="55" cy="55" rx="22" ry="14" fill="#c9a0a8" opacity="0.25" transform="rotate(-30 55 55)"/>
+    <ellipse cx="80" cy="70" rx="18" ry="10" fill="#d4c5e2" opacity="0.2" transform="rotate(20 80 70)"/>
+    <circle cx="110" cy="25" r="6" fill="#b5c9b0" opacity="0.4"/>
+    <circle cx="25" cy="110" r="6" fill="#f2d4d7" opacity="0.4"/>
+  </svg>
+  <svg class="corner-flowers corner-tr" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="18" fill="#f2d4d7" opacity="0.7"/>
+    <circle cx="65" cy="20" r="12" fill="#d4c5e2" opacity="0.6"/>
+    <circle cx="20" cy="65" r="12" fill="#b5c9b0" opacity="0.5"/>
+    <circle cx="90" cy="40" r="8" fill="#f2d4d7" opacity="0.5"/>
+    <circle cx="40" cy="90" r="8" fill="#d4c5e2" opacity="0.5"/>
+  </svg>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 💕</button>
-      <button id="noBtn">No 😜</button>
+  <div class="rel">
+    <div class="wax-seal">🌸</div>
+    <div class="save-date">A New Chapter Begins</div>
+    <div class="date-line">SAVE THE DATE: MAY 09, 2026</div>
+    <h1>Babji<br/>&amp; Sravanthi</h1>
+    <div class="divider"></div>
+    <p class="kab-ab">Everyone kept asking "When?"<br/>We finally said "It's happening!" 💌</p>
+  </div>
+</section>
+
+<!-- ══════════ COUNTDOWN ══════════ -->
+<section id="countdown" class="floral-bg fade-up">
+  <div class="rel">
+    <div class="tag">Counting down to our big day</div>
+    <div class="couple-photo-hero-placeholder">💑</div>
+    <h2>The Big Day Is Near</h2>
+    <div class="countdown-grid">
+      <div class="countdown-box"><div class="num" id="cd-days">--</div><div class="lbl">Days</div></div>
+      <div class="countdown-box"><div class="num" id="cd-hours">--</div><div class="lbl">Hours</div></div>
+      <div class="countdown-box"><div class="num" id="cd-mins">--</div><div class="lbl">Minutes</div></div>
+      <div class="countdown-box"><div class="num" id="cd-secs">--</div><div class="lbl">Seconds</div></div>
     </div>
+    <div class="divider"></div>
+    <div class="tag" style="margin-top:20px;">Whose side are you on? 🤔</div>
+    <div class="team-buttons">
+      <button class="team-btn" id="btn-groom" onclick="vote('groom')">Team Groom 🤵</button>
+      <button class="team-btn" id="btn-bride" onclick="vote('bride')">Team Bride 👰</button>
+    </div>
+    <div class="vote-result" id="vote-result"></div>
+  </div>
+</section>
 
-    <div id="result" class="result hidden">
-      Yayyyy! 💃🕺  
-      <br/>I knew you'd say yes ❤️
+<!-- ══════════ WELCOME ══════════ -->
+<section id="welcome" class="fade-up">
+  <svg class="corner-flowers corner-tl" style="width:120px;opacity:0.4;" viewBox="0 0 200 200" fill="none">
+    <circle cx="30" cy="30" r="18" fill="#c9a0a8"/>
+    <circle cx="65" cy="20" r="12" fill="#d4c5e2"/>
+    <circle cx="20" cy="65" r="12" fill="#b5c9b0"/>
+  </svg>
+  <svg class="corner-flowers corner-tr" style="width:120px;opacity:0.4;" viewBox="0 0 200 200" fill="none">
+    <circle cx="30" cy="30" r="18" fill="#c9a0a8"/>
+    <circle cx="65" cy="20" r="12" fill="#d4c5e2"/>
+    <circle cx="20" cy="65" r="12" fill="#b5c9b0"/>
+  </svg>
+  <div class="rel">
+    <div class="welcome-h">Welcome</div>
+    <div class="tag">to our sunshower wedding</div>
+    <div class="divider"></div>
+    <p class="intro-text">
+      After all the "when?" and "soon"s...<br/>
+      it's finally here! 🌤️<br/><br/>
+      And we'd love for you to be part of it 🕊️
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ MEET THE COUPLE ══════════ -->
+<section id="couple" class="fade-up">
+  <div class="tag">Meet the Couple</div>
+  <h2>Our Story</h2>
+  <div class="divider"></div>
+
+  <div class="person-card">
+    <div class="person-avatar">👰</div>
+    <h3>Sravanthi Nathireddy</h3>
+    <p>The calm to his chaos, the smile behind every moment, and the heart of this beautiful story.</p>
+  </div>
+
+  <div style="font-size:2rem;margin:8px 0;">💞</div>
+
+  <div class="person-card">
+    <div class="person-avatar">🤵</div>
+    <h3>Babji Polisetti</h3>
+    <p>The one who finally said "ab!" — and meant it with all his heart. The chaos to her calm.</p>
+  </div>
+</section>
+
+<!-- ══════════ EVENTS ══════════ -->
+<section id="events" class="fade-up">
+  <div class="tag">Our Special Events</div>
+  <h2>Multiple Events,<br/>Endless Fun</h2>
+  <p class="events-subtitle">Get ready — the fun is just getting started! 🎉</p>
+
+  <div class="event-card event-haldi">
+    <div class="event-icon">💛</div>
+    <div class="event-info">
+      <h3>Haldi</h3>
+      <div class="event-date">May 07, 2026 · 10AM Onwards</div>
+      <div class="event-venue">📍 Sai Farms, Badlapur</div>
+      <div class="event-dress">👗 Dress Code: Yellow & Pastels 🌼</div>
+      <div class="event-desc">Smiles, turmeric, and pure joy — because this is where the party really kicks off 💛</div>
     </div>
   </div>
 
- <script>
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const result = document.getElementById("result");
-  const title = document.getElementById("title");
+  <div class="event-card event-wedding">
+    <div class="event-icon">💒</div>
+    <div class="event-info">
+      <h3>Wedding Ceremony</h3>
+      <div class="event-date">May 09, 2026 · 10AM Onwards</div>
+      <div class="event-venue">📍 Sai Farms, Badlapur</div>
+      <div class="event-dress">👗 Dress Code: Ethnic Chic ✨</div>
+      <div class="event-desc">The moment we've all been waiting for — two families, one beautiful forever 💍</div>
+    </div>
+  </div>
 
-  // --- Read name from URL ---
-  const params = new URLSearchParams(window.location.search);
-  const toName = params.get("to");
+  <div class="event-card event-reception">
+    <div class="event-icon">🥂</div>
+    <div class="event-info">
+      <h3>Reception</h3>
+      <div class="event-date">May 09, 2026 · 1PM Onwards</div>
+      <div class="event-venue">📍 Venue TBA</div>
+      <div class="event-dress">👗 Dress Code: Glam All the Way 🌟</div>
+      <div class="event-desc">Celebrate the newlyweds — champagne, laughter, and endless memories 🥂</div>
+    </div>
+  </div>
+</section>
 
-  if (toName) {
-    const safeName = decodeURIComponent(toName);
-    title.innerHTML = `${safeName}, will you be my Valentine? 💖`;
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="footer">
+  <div class="footer-names">Sravanthi & Babji</div>
+  <div class="tag" style="color:rgba(253,248,244,0.5);">April 26, 2026</div>
+  <div class="divider" style="background:linear-gradient(90deg,transparent,rgba(201,160,168,0.5),transparent);"></div>
+  <p>With love & laughter,<br/>we can't wait to celebrate with you 💌</p>
+  <div class="hashtag" style="margin-top:20px;">#SravanthiWeddingBabji &nbsp;|&nbsp; #AbHoGayaFinal</div>
+  <p style="font-size:0.75rem;margin-top:30px;opacity:0.35;">Crafted with ❤️</p>
+</footer>
+
+<script>
+  /* ── Countdown ── */
+  const weddingDate = new Date('2026-05-09T10:00:00+05:30');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = weddingDate - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── Team Vote ── */
+  let voted = localStorage.getItem('vaiShYash_vote') || null;
+  let groomVotes = parseInt(localStorage.getItem('vaiShYash_groom') || '248');
+  let brideVotes = parseInt(localStorage.getItem('vaiShYash_bride') || '191');
+
+  function vote(team) {
+    if (voted) {
+      showResult();
+      return;
+    }
+    voted = team;
+    if (team === 'groom') groomVotes++;
+    else brideVotes++;
+    localStorage.setItem('vaiShYash_vote', voted);
+    localStorage.setItem('vaiShYash_groom', groomVotes);
+    localStorage.setItem('vaiShYash_bride', brideVotes);
+    document.getElementById('btn-' + team).classList.add('active');
+    showResult();
   }
 
-  function moveNoButton() {
-    const btnRect = noBtn.getBoundingClientRect();
-    const maxX = window.innerWidth - btnRect.width - 20;
-    const maxY = window.innerHeight - btnRect.height - 20;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+  function showResult() {
+    const total = groomVotes + brideVotes;
+    const gPct = Math.round((groomVotes / total) * 100);
+    const bPct = 100 - gPct;
+    document.getElementById('vote-result').innerHTML =
+      `🤵 Team Groom ${gPct}% &nbsp;|&nbsp; Team Bride ${bPct}% 👰`;
+    if (voted) document.getElementById('btn-' + voted).classList.add('active');
   }
 
-  // Desktop
-  noBtn.addEventListener("mouseenter", moveNoButton);
+  if (voted) showResult();
 
-  // Mobile
-  noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveNoButton();
-  });
-
-  // Fallback
-  noBtn.addEventListener("click", moveNoButton);
-
-  yesBtn.addEventListener("click", () => {
-    document.querySelector(".buttons").classList.add("hidden");
-    result.classList.remove("hidden");
-    startHearts();
-  });
-
-  function startHearts() {
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 5000);
-    }, 500);
-  }
+  /* ── Scroll fade-up ── */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
-
 </body>
 </html>
-
-
